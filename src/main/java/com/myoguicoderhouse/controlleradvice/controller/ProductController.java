@@ -33,7 +33,7 @@ public class ProductController {
         }
         List<ProductModel> filteredProduct = products.stream().filter(product -> Objects.equals(product.getId(), id)).collect(Collectors.toList());
 
-        return filteredProduct.findFirst().orElse(new ProductModel("No se encontro producto", 0));
+        return filteredProduct.stream().findFirst().orElse(new ProductModel("No se encontro producto", 0));
     }
 
     @PostMapping("/products")
