@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path="/api")
@@ -30,7 +31,7 @@ public class ProductController {
         if(id == 0) {
             throw new ApiRestException("Id must be greater than 0.");
         }
-        var filteredProduct = products.stream().filter(product -> Objects.equals(product.getId(), id));
+        List<ProductModel> filteredProduct = products.stream().filter(product -> Objects.equals(product.getId(), id)).collect(Collectors.toList());
 
         return filteredProduct.findFirst().orElse(new ProductModel("No se encontro producto", 0));
     }
